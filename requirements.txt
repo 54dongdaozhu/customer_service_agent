@@ -1,0 +1,6 @@
+# 先只装阶段一必需的，后续阶段再补充
+langchain
+langchain-core
+langchain-community
+python-dotenv
+langchain-openai
