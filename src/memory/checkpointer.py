@@ -34,3 +34,33 @@ def make_config(thread_id: str) -> dict:
             "thread_id": thread_id
         }
     }
+def get_session_history(supervisor, thread_id: str) -> list:
+    """
+    查看某个会话的完整对话历史
+
+    Args:
+        supervisor: 监督者系统
+        thread_id: 会话ID
+
+    Returns:
+        消息列表
+    """
+    config = make_config(thread_id)
+    state = supervisor.get_state(config)
+    return state.values.get("messages", [])
+
+
+def print_session_history(supervisor, thread_id: str):
+    """打印某个会话的对话历史"""
+    messages = get_session_history(supervisor, thread_id)
+
+    print(f"\n📋 会话 [{thread_id}] 共 {len(messages)} 条消息：")
+    print('─' * 50)
+
+    for msg in messages:
+        msg_type = type(msg).__name__
+        if msg_type == "HumanMessage":
+            print(f"👤 用户: {msg.content[:100]}")
+        elif msg_type == "AIMessage" and msg.content:
+            print(f"🤖 AI: {msg.content[:100]}")
+    print('─' * 50)

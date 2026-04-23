@@ -1,11 +1,13 @@
 """监督者 Agent（主管）"""
 from langgraph_supervisor import create_supervisor
+from langgraph.checkpoint.memory import InMemorySaver
 from langchain_core.messages import HumanMessage
 # 依赖包：langgraph-supervisor langchain_core
 
 from src.agents.product_agent import create_product_agent
 from src.agents.order_agent import create_order_agent
 from src.agents.complaint_agent import create_complaint_agent
+from src.memory.checkpointer import get_memory_saver
 
 
 def build_customer_service_system(llm):
@@ -73,17 +75,28 @@ def build_customer_service_system(llm):
 3. 等待专家返回结果
 4. 整合结果，用友好的语气回复用户
 5. 如有需要，继续派遣其他专家
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🧠 记忆原则（重要！）：
+- 记住用户的姓名，之后的对话中主动使用
+- 记住用户提过的订单号，不要让用户重复说
+- 记住用户的问题背景，保持对话连贯性
+- 如果用户说"刚才那个"、"上面说的"，结合历史理解
+
 """
 
     # ========== Step 3：创建 Supervisor ==========
+    # ⭐ 关键：传入 checkpointer 开启记忆
+    memory = get_memory_saver()
+
     supervisor = create_supervisor(
         agents=[product_agent, order_agent, complaint_agent],
         model=llm,
         prompt=supervisor_prompt,
-    ).compile()
+    ).compile(
+        checkpointer=memory  # ⭐ 加在 compile 里
+    )
 
     return supervisor
-
 
 if __name__ == "__main__":
     import sys, os
