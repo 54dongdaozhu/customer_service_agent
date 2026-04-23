@@ -44,6 +44,15 @@
       "order_id": "O001",
       "status": "待处理",
       "created_at": "2026-04-23 09:14:17"
+    },
+    {
+      "ticket_id": "T0006",
+      "user_name": "陈伟",
+      "issue_type": "产品质量",
+      "description": "用户收到订单O001的iPhone 15，发现屏幕有坏点，要求投诉并咨询退货流程。订单显示收货人为张三，需核实用户身份。",
+      "order_id": "O001",
+      "status": "待处理",
+      "created_at": "2026-04-23 09:31:07"
     }
   ]
 }
