@@ -13,33 +13,35 @@
 - bge-base-zh 嵌入模型
 - Streamlit Web UI
 
-## 快速开始
+## 快速启动
 
-### 1. 克隆项目
-```bash
-git clone <your-repo-url>
-cd customer_service_agent
-```
-
-### 2. 创建虚拟环境
-```bash
-python -m venv venv
-source venv/bin/activate  # Mac/Linux
-# venv\Scripts\activate   # Windows
-```
-
-### 3. 安装依赖
+### 1. 安装依赖
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. 配置环境变量
-复制 `.env.example` 为 `.env`，填入你的 API Key
-
-### 5. 运行测试
+### 2. 配置环境变量
 ```bash
-python scripts/test_hello.py
+cp .env.example .env
+# 填入 OPENAI_API_KEY 和 LANGSMITH_API_KEY
 ```
+
+### 3. 下载嵌入模型
+```bash
+python scripts/download_model.py
+```
+
+### 4. 构建向量知识库（只需运行一次）
+```bash
+python scripts/build_vectordb.py
+```
+
+### 5. 启动 Web UI
+```bash
+streamlit run app.py
+```
+
+打开浏览器访问：http://localhost:8501
 
 ## 项目进度
 
