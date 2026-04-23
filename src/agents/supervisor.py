@@ -1,7 +1,7 @@
 """监督者 Agent（主管）"""
 from langgraph_supervisor import create_supervisor
 from langgraph.checkpoint.memory import InMemorySaver
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import HumanMessage, trim_messages
 # 依赖包：langgraph-supervisor langchain_core
 
 from src.agents.product_agent import create_product_agent
@@ -88,12 +88,21 @@ def build_customer_service_system(llm):
     # ⭐ 关键：传入 checkpointer 开启记忆
     memory = get_memory_saver()
 
+    # 消息裁剪：只保留最近 20 条，避免历史无限累积
+    trimmer = trim_messages(
+        max_tokens=20,
+        strategy="last",
+        token_counter=len,
+        include_system=True,
+    )
+
     supervisor = create_supervisor(
         agents=[product_agent, order_agent, complaint_agent],
         model=llm,
         prompt=supervisor_prompt,
+        output_mode="last_message",  # 直接透传专家回答，跳过 Supervisor 二次整合
     ).compile(
-        checkpointer=memory  # ⭐ 加在 compile 里
+        checkpointer=memory
     )
 
     return supervisor
@@ -111,7 +120,8 @@ if __name__ == "__main__":
     # 快速冒烟测试
     test = "iPhone 15 多少钱？"
     print(f"测试: {test}")
-    resp = supervisor.invoke({
-        "messages": [HumanMessage(content=test)]
-    })
+    resp = supervisor.invoke(
+        {"messages": [HumanMessage(content=test)]},
+        config={"configurable": {"thread_id": "test-001"}},
+    )
     print(f"回答: {resp['messages'][-1].content}")

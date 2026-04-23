@@ -21,3 +21,6 @@ pymilvus[milvus-lite]
 # ========== 阶段四新增 ==========
 langgraph
 langgraph-supervisor
+# ========== 阶段七新增 ==========
+streamlit
+langsmith

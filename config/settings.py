@@ -24,3 +24,7 @@ VECTOR_DIM = 768  # bge-base-zh 的维度
 # ========== 业务数据配置 ==========
 MOCK_DB_PATH = str(PROJECT_ROOT / "data" / "mock_db.json")
 TICKETS_DB_PATH = str(PROJECT_ROOT / "data" / "tickets.json")
+# ========== LangSmith 配置 ==========
+LANGSMITH_TRACING = os.getenv("LANGSMITH_TRACING", "false")
+LANGSMITH_API_KEY = os.getenv("LANGSMITH_API_KEY", "")
+LANGSMITH_PROJECT = os.getenv("LANGSMITH_PROJECT", "customer-service-agent")
