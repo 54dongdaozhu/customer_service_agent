@@ -1,0 +1,49 @@
+{
+  "tickets": [
+    {
+      "ticket_id": "T0001",
+      "user_name": "张三",
+      "issue_type": "物流问题",
+      "description": "订单 O001 已经一周了还没收到，物流状态一直不更新",
+      "order_id": "O001",
+      "status": "待处理",
+      "created_at": "2026-04-23 08:48:57"
+    },
+    {
+      "ticket_id": "T0002",
+      "user_name": "王强",
+      "issue_type": "物流问题",
+      "description": "订单 O001 的物流太慢了",
+      "order_id": "O001",
+      "status": "待处理",
+      "created_at": "2026-04-23 08:53:33"
+    },
+    {
+      "ticket_id": "T0003",
+      "user_name": "李明",
+      "issue_type": "物流问题",
+      "description": "用户投诉订单O001的物流一直不动。",
+      "order_id": "O001",
+      "status": "待处理",
+      "created_at": "2026-04-23 09:07:03"
+    },
+    {
+      "ticket_id": "T0004",
+      "user_name": "陈七",
+      "issue_type": "物流问题",
+      "description": "用户陈七投诉订单 O001 物流速度过慢。订单实际用户为张三，商品为 iPhone 15 128GB，金额 ¥5999，状态已发货，下单日期 2025-04-15。收货地址：北京市海淀区中关村大街 1 号。",
+      "order_id": "O001",
+      "status": "待处理",
+      "created_at": "2026-04-23 09:10:52"
+    },
+    {
+      "ticket_id": "T0005",
+      "user_name": "李明",
+      "issue_type": "物流问题",
+      "description": "订单O001的物流一直不动，用户投诉物流停滞。",
+      "order_id": "O001",
+      "status": "待处理",
+      "created_at": "2026-04-23 09:14:17"
+    }
+  ]
+}

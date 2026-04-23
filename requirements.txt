@@ -1,6 +1,23 @@
-# 先只装阶段一必需的，后续阶段再补充
+# 阶段一已有
 langchain
 langchain-core
 langchain-community
 python-dotenv
 langchain-openai
+
+# ========== 阶段二新增 ==========
+# 文档处理
+langchain-text-splitters
+unstructured[md]
+pypdf
+
+# 嵌入模型
+langchain-huggingface
+sentence-transformers
+
+# 向量数据库
+pymilvus[milvus-lite]
+
+# ========== 阶段四新增 ==========
+langgraph
+langgraph-supervisor
